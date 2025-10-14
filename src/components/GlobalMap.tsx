@@ -1,14 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
+import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 const GlobalMap = () => {
   const locations = [
-    { city: "New York", count: 1247, left: "20%", top: "35%" },
-    { city: "London", count: 892, left: "48%", top: "30%" },
-    { city: "Tokyo", count: 1563, left: "85%", top: "40%" },
-    { city: "Berlin", count: 634, left: "50%", top: "28%" },
-    { city: "Sydney", count: 421, left: "88%", top: "75%" },
-    { city: "Mumbai", count: 987, left: "68%", top: "52%" },
+    { city: "New York", count: 1247, coordinates: [-74.006, 40.7128] },
+    { city: "London", count: 892, coordinates: [-0.1276, 51.5074] },
+    { city: "Tokyo", count: 1563, coordinates: [139.6917, 35.6895] },
+    { city: "Berlin", count: 634, coordinates: [13.405, 52.52] },
+    { city: "Sydney", count: 421, coordinates: [151.2093, -33.8688] },
+    { city: "Mumbai", count: 987, coordinates: [72.8777, 19.076] },
   ];
 
   return (
@@ -21,43 +24,56 @@ const GlobalMap = () => {
       </CardHeader>
       <CardContent>
         <div className="relative h-[400px] overflow-hidden rounded-lg bg-gradient-to-br from-secondary to-muted">
-          {/* Simplified world map representation */}
-          <div className="absolute inset-0 opacity-10">
-            <svg viewBox="0 0 1000 500" className="h-full w-full">
-              <path
-                d="M 100 150 Q 200 100 300 150 T 500 150 Q 600 100 700 150 T 900 150"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="2"
-              />
-              <path
-                d="M 100 300 Q 200 250 300 300 T 500 300 Q 600 250 700 300 T 900 300"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="2"
-              />
-            </svg>
-          </div>
-
-          {/* Location markers */}
-          {locations.map((location) => (
-            <div
-              key={location.city}
-              className="group absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: location.left, top: location.top }}
-            >
-              <div className="relative">
-                <div className="absolute -inset-2 rounded-full bg-accent/20 animate-ping" />
-                <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-accent shadow-elevated">
-                  <MapPin className="h-4 w-4 text-accent-foreground" />
-                </div>
-                <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-card px-3 py-1.5 text-xs font-medium shadow-elevated opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="font-semibold">{location.city}</div>
-                  <div className="text-muted-foreground">{location.count} devices</div>
-                </div>
-              </div>
-            </div>
-          ))}
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{
+              scale: 130,
+            }}
+            className="h-full w-full"
+          >
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill="hsl(var(--muted-foreground) / 0.2)"
+                    stroke="hsl(var(--border))"
+                    strokeWidth={0.5}
+                    style={{
+                      default: { outline: "none" },
+                      hover: { fill: "hsl(var(--muted-foreground) / 0.3)", outline: "none" },
+                      pressed: { outline: "none" },
+                    }}
+                  />
+                ))
+              }
+            </Geographies>
+            {locations.map((location) => (
+              <Marker key={location.city} coordinates={location.coordinates as [number, number]}>
+                <g className="group">
+                  <circle
+                    r={8}
+                    fill="hsl(var(--accent))"
+                    stroke="hsl(var(--accent-foreground))"
+                    strokeWidth={2}
+                    className="animate-pulse"
+                  />
+                  <circle
+                    r={4}
+                    fill="hsl(var(--accent-foreground))"
+                  />
+                  <text
+                    textAnchor="middle"
+                    y={-12}
+                    className="text-xs font-semibold fill-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    {location.city}: {location.count}
+                  </text>
+                </g>
+              </Marker>
+            ))}
+          </ComposableMap>
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">

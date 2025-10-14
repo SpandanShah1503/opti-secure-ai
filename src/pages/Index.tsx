@@ -4,6 +4,7 @@ import VulnerabilityTable from "@/components/VulnerabilityTable";
 import ScannerForm from "@/components/ScannerForm";
 import GlobalMap from "@/components/GlobalMap";
 import MLInsights from "@/components/MLInsights";
+import PenetrationTestingTool from "@/components/PenetrationTestingTool";
 import { Camera, Shield, AlertTriangle, Activity } from "lucide-react";
 
 const Index = () => {
@@ -65,6 +66,11 @@ const Index = () => {
         <div id="scanner" className="mb-8 grid gap-6 lg:grid-cols-2">
           <ScannerForm />
           <MLInsights />
+        </div>
+
+        {/* Penetration Testing Tool */}
+        <div className="mb-8">
+          <PenetrationTestingTool />
         </div>
 
         {/* Vulnerability Table */}

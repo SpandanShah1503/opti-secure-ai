@@ -31,7 +31,7 @@ const MLInsights = () => {
   ];
 
   return (
-    <Card className="shadow-card">
+    <Card className="shadow-card ">
       <CardHeader>
         <CardTitle className="text-xl font-semibold">ML Model Performance</CardTitle>
         <CardDescription>
@@ -55,20 +55,20 @@ const MLInsights = () => {
                     {insight.value}%
                   </span>
                 </div>
-                <Progress value={insight.value} className="h-2" />
+                <Progress value={insight.value} className="h-2 bg-yellow-300" />
               </div>
             );
           })}
         </div>
 
-        <div className="mt-6 rounded-lg bg-accent/10 p-4">
+        <div className="mt-6 rounded-lg bg-accent/10 p-4 bg-green-600/30">
           <div className="flex items-start gap-3">
             <Brain className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-            <div className="space-y-1">
+            <div className="space-y-1 ">
               <p className="text-sm font-medium text-foreground">
                 Latest Model Update
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground ">
                 The ML model has been trained on 15,234 new vulnerability patterns.
                 Prediction accuracy improved by 3.2% compared to the previous version.
               </p>

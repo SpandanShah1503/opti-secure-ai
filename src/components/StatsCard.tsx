@@ -25,7 +25,7 @@ const StatsCard = ({ title, value, change, icon: Icon, trend = "neutral", varian
   };
 
   return (
-    <Card className="shadow-card hover:shadow-elevated transition-shadow">
+    <Card className="shadow-card hover:shadow-elevated transition-shadow bg-">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div className="space-y-1">

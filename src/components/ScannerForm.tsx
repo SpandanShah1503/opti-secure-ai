@@ -27,7 +27,7 @@ const ScannerForm = () => {
   };
 
   return (
-    <Card className="shadow-card">
+    <Card className="shadow-card ">
       <CardHeader>
         <CardTitle className="text-xl font-semibold">Vulnerability Scanner</CardTitle>
         <CardDescription>
@@ -88,7 +88,7 @@ const ScannerForm = () => {
 
           <Button
             type="submit"
-            className="w-full bg-gradient-accent"
+            className="w-full bg-red-500/90 hover:bg-red-700 text-black font-bold "
             disabled={isScanning}
           >
             {isScanning ? (
@@ -98,7 +98,7 @@ const ScannerForm = () => {
               </>
             ) : (
               <>
-                <Search className="mr-2 h-4 w-4" />
+                <Search className="mr-2 h-4 w-4 text-semibold " />
                 Start Scan
               </>
             )}

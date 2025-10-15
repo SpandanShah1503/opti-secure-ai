@@ -9,7 +9,7 @@ import { Camera, Shield, AlertTriangle, Activity } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background ">
       <Header />
       
       <main className="container px-4 py-8">
@@ -22,7 +22,7 @@ const Index = () => {
         </div>
 
         {/* Stats Grid */}
-        <div id="dashboard" className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div id="dashboard" className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ">
           <StatsCard
             title="Total Cameras Scanned"
             value="6,744"
@@ -30,6 +30,7 @@ const Index = () => {
             icon={Camera}
             trend="up"
             variant="default"
+            
           />
           <StatsCard
             title="Active Vulnerabilities"
@@ -81,7 +82,7 @@ const Index = () => {
 
       <footer className="border-t border-border bg-card py-6">
         <div className="container px-4 text-center text-sm text-muted-foreground">
-          <p>© 2024 CCTV SecureWatch - National Technical Research Organisation (NTRO)</p>
+          <p>© 2025 CCTV SecureWatch - National Technical Research Organisation (NTRO)</p>
         </div>
       </footer>
     </div>
